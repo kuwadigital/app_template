@@ -9,3 +9,4 @@
 - Les formulaires imbriquée
 - Les taches asynchrones
 - L'internationalisation
+- La puissance de symfony-ux pour optimiser le front-end
