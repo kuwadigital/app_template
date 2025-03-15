@@ -1,5 +1,7 @@
 # important
 
+# Avant toutes choses il va falloir s'assurer qu'auccun process n'utilise le port 80 afin de permetre un bon fonctionement de symfony (la toolbar) 
+
 ## Dev/build configuration
 - Add lines to the /etc/hosts file corresponding to the virtual hosts:
 
