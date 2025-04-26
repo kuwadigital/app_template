@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Security\Voter\HomeAccessVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -19,7 +20,7 @@ final class HomeController extends AbstractController
     }
 
     #[Route('/home/logged-in', name: 'app_home_logged_in')]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted(HomeAccessVoter::LOGGED_IN)]
     public function logged_in(#[CurrentUser] $user): Response
     {
         return $this->render('home/logged-in.html.twig', [

@@ -1,0 +1,10 @@
+{# templates/bundles/TwigBundle/Exception/error.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur{% endblock %}
+
+{% block body %}
+    <h1>Une erreur est survenue</h1>
+    <p>Désolé, une erreur inattendue est survenue.</p>
+    <a href="{{ path('app_home') }}">Retourner à l'accueil</a>
+{% endblock %}
