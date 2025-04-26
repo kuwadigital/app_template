@@ -41,17 +41,21 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            // Récupération des variables d'environnement
+            $supportEmail = $_ENV['SUPPORT_EMAIL'] ?? 'support@app.tamplate.local';
+            $supportSubject = $_ENV['SUPPORT_EMAIL_SUBJECT'] ?? 'Please Confirm your Email';
+            $supportName = $_ENV['SUPPORT_NAME'] ?? 'App Tamplate';
+
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('support@app.tamplate.local', 'App Tamplate'))
+                    ->from(new Address($supportEmail, $supportName))
                     ->to((string) $user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject($supportSubject)
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
-            // do anything else you need here, like send an email
-
+            // Authentifier l'utilisateur directement après l'inscription
             return $security->login($user, AppAuthenticator::class, 'main');
         }
 
@@ -79,6 +83,6 @@ class RegistrationController extends AbstractController
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('app_default');
+        return $this->redirectToRoute('app_home_logged_in');
     }
 }

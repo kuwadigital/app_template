@@ -23,3 +23,16 @@ services:
       VIRTUAL_HOST: ${ADMINER_VIRTUAL_HOST}
     depends_on:
       - proxy
+  
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "${PORT_MAIL_SMTP}:1025"
+      - "${PORT_MAIL_HTTP}:8025"
+
+  rabbitmq:
+    image: rabbitmq:${RABBITMQ_VERSION}-management
+    ports:
+      - ${PORT_RABBITMQ_LISTENER}:5672
+      - ${PORT_RABBITMQ_TCP_LISTENER}:5673
+      - ${PORT_RABBITMQ_MANAGEMENT}:15672

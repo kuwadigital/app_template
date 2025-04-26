@@ -40,6 +40,12 @@ RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
     xml \
     soap
 
+# install rabbitmq
+RUN apt-get update \
+    && apt-get install -y librabbitmq-dev libssl-dev \
+    && pecl install amqp \
+    && docker-php-ext-enable amqp
+
 ARG XDEBUG_VERSION=3.3.1
 RUN \
     # Install Xdebug

@@ -17,4 +17,9 @@
     > make app-build
 ```
 
+- Lancer les services de consomation de messages (Queues)
+```
+    > php bin/console messenger:consume async -vv
+```
+
 ## Open the application in the browser with the  URL you have configured in the .env file

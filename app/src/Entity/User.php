@@ -78,9 +78,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        
         // adding super admin role
         if ($this->username === 'admin') {
             $roles[] = 'ROLE_SUPER_ADMIN';
+        }
+
+        // adding verified role
+        if ($this->isVerified) {
+            $roles[] = 'ROLE_VERIFIED';
         }
 
         return array_unique($roles);
